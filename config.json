@@ -1,0 +1,321 @@
+{
+  "name": "D7ecode Digital Theme",
+  "handle": "d7ecode-digital",
+  "author": "Custom",
+  "version": "1.0.0",
+  "rtl": true,
+  "settings": {
+    "colors": {
+      "primary": {
+        "label": "Primary color",
+        "type": "color",
+        "default": "#18a058"
+      },
+      "secondary": {
+        "label": "Secondary color",
+        "type": "color",
+        "default": "#111827"
+      }
+    },
+    "fonts": {
+      "body_font": {
+        "label": "Body font family",
+        "type": "text",
+        "default": "Tajawal, system-ui"
+      }
+    },
+    "global": {
+      "enable_hero": {
+        "label": "Show hero slider",
+        "type": "checkbox",
+        "default": true
+      },
+      "enable_categories": {
+        "label": "Show categories icons",
+        "type": "checkbox",
+        "default": true
+      },
+      "enable_featured": {
+        "label": "Show featured products",
+        "type": "checkbox",
+        "default": true
+      },
+      "enable_products_slider": {
+        "label": "Show tabbed products slider",
+        "type": "checkbox",
+        "default": true
+      },
+      "enable_testimonials": {
+        "label": "Show testimonials",
+        "type": "checkbox",
+        "default": true
+      },
+      "enable_steps": {
+        "label": "Show 3 steps section",
+        "type": "checkbox",
+        "default": true
+      },
+      "enable_faq": {
+        "label": "Show FAQ section",
+        "type": "checkbox",
+        "default": true
+      },
+      "enable_blog": {
+        "label": "Show blog preview",
+        "type": "checkbox",
+        "default": true
+      },
+      "whatsapp_floating_link": {
+        "label": "WhatsApp floating button URL",
+        "type": "text",
+        "default": ""
+      },
+      "footer_about": {
+        "label": "Footer about text",
+        "type": "textarea",
+        "default": "منصة متخصصة في بيع التراخيص الرقمية الأصلية لبرامج أوفيس، ويندوز، أدوبي وغيرها، مع تفعيل فوري ودعم فني مبسط باللغة العربية."
+      },
+      "social_whatsapp": {
+        "label": "WhatsApp link",
+        "type": "text",
+        "default": ""
+      },
+      "social_twitter": {
+        "label": "X / Twitter link",
+        "type": "text",
+        "default": ""
+      },
+      "social_instagram": {
+        "label": "Instagram link",
+        "type": "text",
+        "default": ""
+      },
+      "social_discord": {
+        "label": "Discord link",
+        "type": "text",
+        "default": ""
+      }
+    }
+  },
+  "sections": {
+    "hero-slider": {
+      "name": "Hero slider",
+      "settings": {
+        "hero_slides": {
+          "label": "Slides",
+          "type": "repeater",
+          "fields": {
+            "title": {
+              "label": "Title",
+              "type": "text"
+            },
+            "subtitle": {
+              "label": "Subtitle",
+              "type": "textarea"
+            },
+            "cta_label": {
+              "label": "CTA label",
+              "type": "text"
+            },
+            "cta_link": {
+              "label": "CTA link",
+              "type": "url"
+            },
+            "image": {
+              "label": "Image",
+              "type": "image"
+            }
+          }
+        }
+      }
+    },
+    "categories-icons": {
+      "name": "Categories icons",
+      "settings": {
+        "categories_title": {
+          "label": "Title",
+          "type": "text",
+          "default": "اختَر نوع البرنامج المناسب لك"
+        },
+        "categories_subtitle": {
+          "label": "Subtitle",
+          "type": "textarea",
+          "default": "برامج أصلية لأنظمة ويندوز، أوفيس، أدوبي، الحماية وغيرهم"
+        },
+        "categories_icons": {
+          "label": "Categories",
+          "type": "repeater",
+          "fields": {
+            "title": {
+              "label": "Title",
+              "type": "text"
+            },
+            "icon": {
+              "label": "Icon",
+              "type": "image"
+            },
+            "collection_url": {
+              "label": "Collection link",
+              "type": "url"
+            }
+          }
+        }
+      }
+    },
+    "featured-products": {
+      "name": "Featured products",
+      "settings": {
+        "featured_title": {
+          "label": "Title",
+          "type": "text",
+          "default": "عروض مميزة على البرامج الأكثر طلباً"
+        },
+        "featured_subtitle": {
+          "label": "Subtitle",
+          "type": "textarea",
+          "default": "استفد من الخصومات المحدودة على برامج أوفيس، ويندوز، أدوبي والمزيد."
+        },
+        "featured_collection_handle": {
+          "label": "Featured collection handle",
+          "type": "text",
+          "default": "featured"
+        }
+      }
+    },
+    "products-slider": {
+      "name": "Tabbed products slider",
+      "settings": {
+        "slider_label": {
+          "label": "Section label",
+          "type": "text",
+          "default": "برامج رقمية"
+        },
+        "slider_title": {
+          "label": "Title",
+          "type": "text",
+          "default": "تصفح حسب الفئة"
+        },
+        "slider_subtitle": {
+          "label": "Subtitle",
+          "type": "textarea",
+          "default": "تبديل سريع بين برامج أوفيس، ويندوز، الحماية وغيرها."
+        },
+        "products_tabs": {
+          "label": "Tabs",
+          "type": "repeater",
+          "fields": {
+            "key": {
+              "label": "Key",
+              "type": "text"
+            },
+            "title": {
+              "label": "Title",
+              "type": "text"
+            },
+            "collection_handle": {
+              "label": "Collection handle",
+              "type": "text"
+            }
+          }
+        }
+      }
+    },
+    "testimonials": {
+      "name": "Testimonials",
+      "settings": {
+        "testimonials_title": {
+          "label": "Title",
+          "type": "text",
+          "default": "تجارب حقيقية تثق فيها"
+        },
+        "testimonials_subtitle": {
+          "label": "Subtitle",
+          "type": "textarea",
+          "default": "عملاؤنا يشاركون تجاربهم مع تفعيل البرامج والدعم الفني."
+        },
+        "testimonials_list": {
+          "label": "Testimonials",
+          "type": "repeater",
+          "fields": {
+            "name": {
+              "label": "Customer name",
+              "type": "text"
+            },
+            "rating": {
+              "label": "Rating",
+              "type": "number"
+            },
+            "text": {
+              "label": "Review text",
+              "type": "textarea"
+            },
+            "date": {
+              "label": "Date",
+              "type": "text"
+            }
+          }
+        }
+      }
+    },
+    "steps": {
+      "name": "Three steps",
+      "settings": {
+        "steps_title": {
+          "label": "Title",
+          "type": "text",
+          "default": "3 خطوات ويوصلك منتجك"
+        },
+        "steps_subtitle": {
+          "label": "Subtitle",
+          "type": "textarea",
+          "default": "عملية شراء سهلة وسريعة بدون تعقيد."
+        }
+      }
+    },
+    "faq": {
+      "name": "FAQ",
+      "settings": {
+        "faq_title": {
+          "label": "Title",
+          "type": "text",
+          "default": "إجابات سريعة على استفساراتك"
+        },
+        "faq_subtitle": {
+          "label": "Subtitle",
+          "type": "textarea",
+          "default": "لو احتجت مساعدة إضافية، فريق الدعم جاهز عبر الواتساب."
+        },
+        "faq_items": {
+          "label": "Questions",
+          "type": "repeater",
+          "fields": {
+            "question": {
+              "label": "Question",
+              "type": "text"
+            },
+            "answer": {
+              "label": "Answer",
+              "type": "textarea"
+            }
+          }
+        }
+      }
+    },
+    "blog-preview": {
+      "name": "Blog preview",
+      "settings": {
+        "blog_title": {
+          "label": "Title",
+          "type": "text",
+          "default": "تعرف على أفضل طريقة لاختيار برامجك"
+        },
+        "blog_subtitle": {
+          "label": "Subtitle",
+          "type": "textarea",
+          "default": "مقالات تشرح الفروق بين الإصدارات، ونصائح لأفضل استخدام للبرامج."
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,68 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <a href="{{ routes.home_url }}">
+            {% if store.logo %}
+              <img src="{{ store.logo }}" alt="{{ store.name }}">
+            {% else %}
+              <strong>{{ store.name }}</strong>
+            {% endif %}
+          </a>
+        </div>
+        <p class="footer-about">
+          {{ settings.footer_about ?? "منصة متخصصة في بيع التراخيص الرقمية الأصلية لبرامج أوفيس، ويندوز، أدوبي وغيرها، مع تفعيل فوري ودعم فني مبسط باللغة العربية." }}
+        </p>
+        <div class="footer-social">
+          {% if settings.social_whatsapp %}
+            <a href="{{ settings.social_whatsapp }}" aria-label="واتساب">✆</a>
+          {% endif %}
+          {% if settings.social_twitter %}
+            <a href="{{ settings.social_twitter }}" aria-label="X / تويتر">𝕏</a>
+          {% endif %}
+          {% if settings.social_instagram %}
+            <a href="{{ settings.social_instagram }}" aria-label="انستجرام">◎</a>
+          {% endif %}
+          {% if settings.social_discord %}
+            <a href="{{ settings.social_discord }}" aria-label="ديسكورد">Ⓓ</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div>
+        <h3 class="footer-heading">روابط سريعة</h3>
+        <ul class="footer-links">
+          <li><a href="{{ routes.home_url }}">الرئيسية</a></li>
+          <li><a href="{{ routes.collections_url }}">كل المنتجات</a></li>
+          <li><a href="{{ routes.blog_url }}">المقالات</a></li>
+          <li><a href="{{ routes.page_url('faq') }}">الأسئلة الشائعة</a></li>
+          <li><a href="{{ routes.contact_url }}">تواصل معنا</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-heading">وسائل الدفع</h3>
+        <div class="footer-payments-row">
+          <span class="footer-payment-pill">مدى</span>
+          <span class="footer-payment-pill">Visa</span>
+          <span class="footer-payment-pill">Mastercard</span>
+          <span class="footer-payment-pill">STC Pay</span>
+          <span class="footer-payment-pill">Apple Pay</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {{ "now" | date("Y") }} {{ store.name }}. جميع الحقوق محفوظة.</span>
+      <span>متجر مرخّص يعمل وفق أنظمة التجارة الإلكترونية في المملكة العربية السعودية.</span>
+    </div>
+  </div>
+
+  {% if settings.whatsapp_floating_link %}
+    <a href="{{ settings.whatsapp_floating_link }}" class="whatsapp-floating" target="_blank" rel="noopener">
+      ⤴
+    </a>
+  {% endif %}
+</footer>
+

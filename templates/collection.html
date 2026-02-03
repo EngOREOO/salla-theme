@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>{{ collection.name }} | {{ store.name }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ head_assets }}
+  <link rel="stylesheet" href="{{ 'assets/main.css' | asset_url }}">
+</head>
+<body>
+  <div class="site-wrapper">
+    {% include "sections/header.html" %}
+
+    <main class="main-content">
+      <section class="section">
+        <div class="container">
+          {% include "snippets/section-title.html" with {
+            label: "قسم المنتجات",
+            title: collection.name,
+            subtitle: collection.description
+          } %}
+
+          <div class="search-bar">
+            <span>🔍</span>
+            <input type="search"
+                   name="q"
+                   value="{{ request.query.q }}"
+                   placeholder="ابحث داخل هذا القسم عن اسم البرنامج أو الإصدار">
+          </div>
+
+          <div class="categories-grid" style="grid-template-columns:repeat(auto-fill,minmax(230px,1fr));">
+            {% paginate collection.products by 24 %}
+              {% for product in paginate.items %}
+                <div>
+                  {% include "snippets/product-card.html" with { product: product } %}
+                </div>
+              {% endfor %}
+            {% endpaginate %}
+          </div>
+        </div>
+      </section>
+    </main>
+
+    {% include "sections/footer.html" %}
+  </div>
+
+  <script src="{{ 'assets/main.js' | asset_url }}" defer></script>
+  {{ footer_assets }}
+</body>
+</html>
+

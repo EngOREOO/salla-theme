@@ -1,0 +1,20 @@
+{% set original_price = product.price.before_discount ?? product.price %}
+{% set final_price = product.price ?? product.price %}
+{% set has_discount = product.price.discount != 0 or original_price > final_price %}
+
+<div class="product-card-prices">
+  {% if has_discount %}
+    <div class="product-card-old-price">
+      {{ original_price | money }}
+    </div>
+  {% endif %}
+  <div class="product-card-final-price">
+    {{ final_price | money }}
+  </div>
+  {% if has_discount %}
+    <div class="product-card-discount">
+      -{{ product.price.discount | round(0, 'floor') }}%
+    </div>
+  {% endif %}
+</div>
+

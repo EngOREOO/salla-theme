@@ -1,0 +1,35 @@
+<section class="section">
+  <div class="container">
+    {% include "snippets/section-title.html" with {
+      label: "مقالات ونصائح",
+      title: settings.blog_title ?? "تعرف على أفضل طريقة لاختيار برامجك",
+      subtitle: settings.blog_subtitle ?? "مقالات تشرح الفروق بين الإصدارات، ونصائح لأفضل استخدام للبرامج."
+    } %}
+
+    {% set posts = blog.articles | default(blog_articles) | slice(0, 3) %}
+
+    <div class="blog-grid">
+      {% for article in posts %}
+        <article class="blog-card">
+          <a href="{{ article.url }}">
+            <div class="blog-card-image">
+              {% if article.image %}
+                <img src="{{ article.image }}" alt="{{ article.title }}">
+              {% else %}
+                <img src="{{ assets.blog_placeholder }}" alt="{{ article.title }}">
+              {% endif %}
+            </div>
+          </a>
+          <div class="blog-card-body">
+            <a href="{{ article.url }}" class="blog-card-title">{{ article.title }}</a>
+            <p class="blog-card-excerpt">{{ article.excerpt | default(article.content | striptags | slice(0, 90) ~ '...') }}</p>
+            <div class="blog-card-meta">
+              {{ article.created_at | date("d/m/Y") }}
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+

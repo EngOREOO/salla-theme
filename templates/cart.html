@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>سلة التسوق | {{ store.name }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ head_assets }}
+  <link rel="stylesheet" href="{{ 'assets/main.css' | asset_url }}">
+</head>
+<body>
+  <div class="site-wrapper">
+    {% include "sections/header.html" %}
+
+    <main class="main-content">
+      <section class="section">
+        <div class="container">
+          {% include "snippets/section-title.html" with {
+            label: "سلة التسوق",
+            title: "مراجعة طلبك قبل الدفع",
+            subtitle: ""
+          } %}
+
+          {% if cart.items_count == 0 %}
+            <p class="step-text">سلتك فارغة حالياً. <a href="{{ routes.collections_url }}">ابدأ التسوق الآن.</a></p>
+          {% else %}
+            <div class="page-section-alt">
+              <table class="cart-table">
+                <thead>
+                  <tr>
+                    <th>المنتج</th>
+                    <th>السعر</th>
+                    <th>الكمية</th>
+                    <th>الإجمالي</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in cart.items %}
+                    <tr>
+                      <td>
+                        <div style="display:flex;gap:.6rem;align-items:center;">
+                          <img src="{{ item.product.image }}" alt="{{ item.product.name }}" style="width:52px;height:52px;border-radius:12px;object-fit:cover;">
+                          <div>
+                            <div style="font-weight:600;font-size:.92rem;">{{ item.product.name }}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>{{ item.price | money }}</td>
+                      <td>{{ item.quantity }}</td>
+                      <td>{{ item.line_price | money }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+              <div style="margin-top:1.2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;align-items:flex-end;">
+                <div>
+                  <p class="step-text" style="margin-bottom:.4rem;">المجموع الفرعي: {{ cart.subtotal_price | money }}</p>
+                  <p class="step-text" style="margin:0;">قد تُضاف ضرائب أو رسوم إضافية في صفحة الدفع.</p>
+                </div>
+                <form action="{{ routes.checkout_url }}" method="post">
+                  <button class="btn-primary" type="submit">إتمام الشراء الآن</button>
+                </form>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </section>
+    </main>
+
+    {% include "sections/footer.html" %}
+  </div>
+
+  <script src="{{ 'assets/main.js' | asset_url }}" defer></script>
+  {{ footer_assets }}
+</body>
+</html>
+

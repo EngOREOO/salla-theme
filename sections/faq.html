@@ -1,0 +1,35 @@
+<section class="section">
+  <div class="container">
+    {% include "snippets/section-title.html" with {
+      label: "الأسئلة الشائعة",
+      title: settings.faq_title ?? "إجابات سريعة على استفساراتك",
+      subtitle: settings.faq_subtitle ?? "لو احتجت مساعدة إضافية، فريق الدعم جاهز عبر الواتساب."
+    } %}
+
+    {% set faq_items = settings.faq_items ?? [] %}
+
+    {% if faq_items|length == 0 %}
+      {% set faq_items = [
+        { "question": "كيف أستلم الطلب؟", "answer": "بعد إتمام الدفع، يتم إرسال كود التفعيل وتعليمات الاستخدام إلى بريدك الإلكتروني ولوحة حسابك في المتجر." },
+        { "question": "هل المنتجات أصلية وموثوقة؟", "answer": "نوفّر مفاتيح أصلية من مصادر معتمدة مع ضمان كامل على التفعيل والاستخدام." },
+        { "question": "هل أقدر أسترجع المنتج أو أستبدله؟", "answer": "نعم، في حال واجهت أي مشكلة بالتفعيل ولم يتم حلّها من فريق الدعم، يحق لك استرجاع المبلغ حسب سياسة الاسترجاع." },
+        { "question": "طرق الدفع المتاحة؟", "answer": "ندعم مدى، فيزا، ماستركارد، STC Pay وغيرها من الوسائل الآمنة." }
+      ] %}
+    {% endif %}
+
+    <div class="faq-list">
+      {% for item in faq_items %}
+        <div class="faq-item{% if loop.first %} is-open{% endif %}" data-faq-item>
+          <div class="faq-header" data-faq-toggle>
+            <div class="faq-question">{{ item.question }}</div>
+            <div class="faq-toggle">›</div>
+          </div>
+          <div class="faq-body" data-faq-body{% if loop.first %} style="max-height: 200px;"{% endif %}>
+            <p class="step-text" style="margin:0 0 .5rem;">{{ item.answer }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+

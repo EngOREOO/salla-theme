@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>{{ page_title ?? store.name }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ head_assets }}
+  <link rel="stylesheet" href="{{ 'assets/main.css' | asset_url }}">
+</head>
+<body>
+  <div class="site-wrapper">
+    {% include "sections/header.html" %}
+
+    <main class="main-content">
+      {% include "sections/hero-slider.html" %}
+      {% include "sections/categories-icons.html" %}
+      {% include "sections/featured-products.html" %}
+      {% include "sections/products-slider.html" %}
+      {% include "sections/testimonials.html" %}
+      {% include "sections/steps.html" %}
+      {% include "sections/faq.html" %}
+      {% include "sections/blog-preview.html" %}
+    </main>
+
+    {% include "sections/footer.html" %}
+  </div>
+
+  <script src="{{ 'assets/main.js' | asset_url }}" defer></script>
+  {{ footer_assets }}
+</body>
+</html>
+

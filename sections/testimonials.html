@@ -1,0 +1,53 @@
+<section class="section">
+  <div class="container">
+    {% include "snippets/section-title.html" with {
+      label: "آراء العملاء",
+      title: settings.testimonials_title ?? "تجارب حقيقية تثق فيها",
+      subtitle: settings.testimonials_subtitle ?? "عملاؤنا يشاركون تجاربهم مع تفعيل البرامج والدعم الفني."
+    } %}
+
+    {% set testimonials = settings.testimonials_list ?? [] %}
+
+    {% if testimonials|length == 0 %}
+      {% set testimonials = [
+        { "name": "Nassir 1", "rating": 5, "text": "الإنسان وصلني الكود بعد الدفع واتّبعت الخطوات المكتوبة وتم التفعيل بسهولة.", "date": "08/05/2025" },
+        { "name": "عبدالرحمن العجلان", "rating": 5, "text": "خدمة ممتازة وسرعة في الرد، شرح واضح وتفعيل فوري. أنصح بالجميع.", "date": "02/04/2025" },
+        { "name": "Fadhel Almuwsais", "rating": 5, "text": "اشتركت اوفيس سنوي ووصل بعد الدفع بدقايق مع شرح التفعيل خطوة بخطوة.", "date": "10/01/2025" }
+      ] %}
+    {% endif %}
+
+    <div class="slider" data-slider>
+      <div class="slider-track" data-slider-track>
+        {% for item in testimonials %}
+          <div class="slider-item">
+            <article class="testimonial-card">
+              <div class="testimonial-header">
+                <div>
+                  <div class="testimonial-name">{{ item.name }}</div>
+                  <div class="testimonial-date">{{ item.date }}</div>
+                </div>
+                {% include "snippets/rating-stars.html" with { rating: item.rating ?? 5, show_text: false } %}
+              </div>
+              <p class="testimonial-text">
+                {{ item.text }}
+              </p>
+            </article>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="slider-nav">
+        <div class="slider-arrows">
+          <button class="slider-arrow-btn" data-slider-prev aria-label="السابق">‹</button>
+          <button class="slider-arrow-btn" data-slider-next aria-label="التالي">›</button>
+        </div>
+        <div class="slider-dots">
+          {% set slides_count = testimonials|length %}
+          {% for i in 1..slides_count %}
+            <span class="slider-dot{% if loop.first %} is-active{% endif %}" data-slider-dot></span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

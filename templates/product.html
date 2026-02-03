@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>{{ product.name }} | {{ store.name }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ head_assets }}
+  <link rel="stylesheet" href="{{ 'assets/main.css' | asset_url }}">
+</head>
+<body>
+  <div class="site-wrapper">
+    {% include "sections/header.html" %}
+
+    <main class="main-content">
+      <section class="section">
+        <div class="container product-main">
+          <div class="product-gallery">
+            {% if product.images|length > 1 %}
+              <div class="slider" data-slider>
+                <div class="slider-track" data-slider-track>
+                  {% for image in product.images %}
+                    <div class="slider-item">
+                      <img src="{{ image.src }}" alt="{{ product.name }}">
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <img src="{{ product.image }}" alt="{{ product.name }}">
+            {% endif %}
+          </div>
+
+          <div class="product-summary">
+            <h1>{{ product.name }}</h1>
+            <div class="product-summary-meta">
+              <span class="badge">تفعيل رقمي فوري</span>
+              <span>التصنيف: {{ product.category.name }}</span>
+              <span>التقييم:
+                {% include "snippets/rating-stars.html" with { rating: product.rating ?? product.reviews.average ?? 5, show_text: true } %}
+              </span>
+            </div>
+
+            <div style="margin-bottom:1rem;">
+              {% include "snippets/price.html" with { product: product } %}
+            </div>
+
+            <div style="margin-bottom:1rem;">
+              {% include "snippets/add-to-cart.html" with { product: product } %}
+            </div>
+
+            <div class="page-section-alt" style="margin-top:1rem;">
+              <h3 style="margin-top:0;font-size:1rem;">وصف المنتج</h3>
+              <div class="step-text">
+                {{ product.description | raw }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {% if product.related_products|length %}
+        <section class="section">
+          <div class="container">
+            {% include "snippets/section-title.html" with {
+              label: "قد يعجبك أيضاً",
+              title: "منتجات مشابهة",
+              subtitle: ""
+            } %}
+            <div class="slider" data-slider>
+              <div class="slider-track" data-slider-track>
+                {% for related in product.related_products %}
+                  <div class="slider-item">
+                    {% include "snippets/product-card.html" with { product: related } %}
+                  </div>
+                {% endfor %}
+              </div>
+              <div class="slider-nav">
+                <div class="slider-arrows">
+                  <button class="slider-arrow-btn" data-slider-prev aria-label="السابق">‹</button>
+                  <button class="slider-arrow-btn" data-slider-next aria-label="التالي">›</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+    </main>
+
+    {% include "sections/footer.html" %}
+  </div>
+
+  <script src="{{ 'assets/main.js' | asset_url }}" defer></script>
+  {{ footer_assets }}
+</body>
+</html>
+

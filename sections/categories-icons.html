@@ -1,0 +1,38 @@
+<section class="section">
+  <div class="container">
+    {% include "snippets/section-title.html" with {
+      label: "أقسام الموقع",
+      title: settings.categories_title ?? "اختَر نوع البرنامج المناسب لك",
+      subtitle: settings.categories_subtitle ?? "برامج أصلية لأنظمة ويندوز، أوفيس، أدوبي، الحماية وغيرهم"
+    } %}
+
+    <div class="categories-grid">
+      {% set categories_list = settings.categories_icons ?? [] %}
+
+      {% if categories_list|length == 0 %}
+        {% set categories_list = [
+          { "title": "مفاتيح أوفيس", "icon": assets.cat_office, "collection_url": routes.collection_office_url },
+          { "title": "مفاتيح ويندوز", "icon": assets.cat_windows, "collection_url": routes.collection_windows_url },
+          { "title": "برامج أدوبي", "icon": assets.cat_adobe, "collection_url": routes.collection_adobe_url },
+          { "title": "كانفا", "icon": assets.cat_canva, "collection_url": routes.collection_canva_url },
+          { "title": "برامج الحماية", "icon": assets.cat_antivirus, "collection_url": routes.collection_antivirus_url },
+          { "title": "برامج متنوعة", "icon": assets.cat_other, "collection_url": routes.collections_url }
+        ] %}
+      {% endif %}
+
+      {% for category in categories_list %}
+        <a href="{{ category.collection_url }}" class="category-card">
+          <div class="category-icon-wrap">
+            {% if category.icon %}
+              <img src="{{ category.icon }}" alt="{{ category.title }}">
+            {% else %}
+              <span>★</span>
+            {% endif %}
+          </div>
+          <div class="category-label">{{ category.title }}</div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+

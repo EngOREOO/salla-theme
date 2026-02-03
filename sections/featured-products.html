@@ -1,0 +1,36 @@
+<section class="section">
+  <div class="container">
+    {% include "snippets/section-title.html" with {
+      label: "الأكثر مبيعاً",
+      title: settings.featured_title ?? "عروض مميزة على البرامج الأكثر طلباً",
+      subtitle: settings.featured_subtitle ?? "استفد من الخصومات المحدودة على برامج أوفيس، ويندوز، أدوبي والمزيد."
+    } %}
+
+    {% set featured_products = collections[settings.featured_collection_handle].products
+      ?? collections["featured"].products
+      ?? products.featured %}
+
+    <div class="slider" data-slider>
+      <div class="slider-track" data-slider-track>
+        {% for product in featured_products | slice(0, 12) %}
+          <div class="slider-item">
+            {% include "snippets/product-card.html" with { product: product } %}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="slider-nav">
+        <div class="slider-arrows">
+          <button class="slider-arrow-btn" data-slider-prev aria-label="السابق">‹</button>
+          <button class="slider-arrow-btn" data-slider-next aria-label="التالي">›</button>
+        </div>
+        <div class="slider-dots">
+          {% set slides_count = (featured_products|length / 4) | round(0, 'ceil') %}
+          {% for i in 1..slides_count %}
+            <span class="slider-dot{% if loop.first %} is-active{% endif %}" data-slider-dot></span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

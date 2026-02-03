@@ -1,0 +1,43 @@
+<article class="product-card">
+  {% if product.price.discount and product.price.discount > 0 %}
+    <div class="product-card-badge">
+      خصم {{ product.price.discount | round(0, 'floor') }}٪
+    </div>
+  {% endif %}
+
+  <button class="product-card-wishlist" data-wishlist-toggle aria-label="إضافة للمفضلة">
+    ♥
+  </button>
+
+  <a href="{{ product.url }}">
+    <div class="product-card-image">
+      {% if product.image %}
+        <img src="{{ product.image }}" alt="{{ product.name }}">
+      {% else %}
+        <img src="{{ assets.placeholder_product_image }}" alt="{{ product.name }}">
+      {% endif %}
+    </div>
+  </a>
+
+  <div class="product-card-body">
+    <a href="{{ product.url }}" class="product-card-title">
+      {{ product.name }}
+    </a>
+
+    <div class="product-card-meta">
+      {% include "snippets/rating-stars.html" with {
+        rating: product.rating ?? product.reviews.average ?? 5,
+        show_text: false
+      } %}
+      {% include "snippets/price.html" with { product: product } %}
+    </div>
+
+    <div class="product-card-footer">
+      {% include "snippets/add-to-cart.html" with { product: product } %}
+      <button type="button" class="btn-ghost">
+        <span>تفاصيل</span>
+      </button>
+    </div>
+  </div>
+</article>
+

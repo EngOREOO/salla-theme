@@ -1,0 +1,60 @@
+<header class="header">
+  <div class="container header-inner">
+    <div class="header-right">
+      <button class="header-icon-btn header-mobile-toggle" data-mobile-toggle aria-label="القائمة">
+        ☰
+      </button>
+      <nav class="header-nav">
+        <ul>
+          <li><a href="{{ routes.home_url }}">الرئيسية</a></li>
+          <li><a href="{{ routes.collections_url }}">المنتجات</a></li>
+          <li><a href="{{ routes.blog_url }}">المقالات</a></li>
+          <li><a href="{{ routes.contact_url }}">تواصل معنا</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="header-logo">
+      <a href="{{ routes.home_url }}">
+        {% if store.logo %}
+          <img src="{{ store.logo }}" alt="{{ store.name }}">
+        {% else %}
+          <strong>{{ store.name }}</strong>
+        {% endif %}
+      </a>
+    </div>
+
+    <div class="header-left">
+      <button class="header-icon-btn" aria-label="بحث">
+        🔍
+      </button>
+      <a href="{{ routes.account_url }}" class="header-icon-btn" aria-label="حسابي">
+        👤
+      </a>
+      <button class="header-icon-btn" aria-label="الوضع الداكن">
+        ☼
+      </button>
+      <button class="header-icon-btn" aria-label="تبديل اللغة">
+        ع
+      </button>
+      <a href="{{ routes.cart_url }}" class="header-icon-btn" style="position: relative;" aria-label="السلة">
+        🛒
+        {% if cart.items_count > 0 %}
+          <span class="header-cart-count">{{ cart.items_count }}</span>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+
+  <div class="header-mobile-menu" data-mobile-menu>
+    <div class="header-mobile-menu-inner container">
+      <ul>
+        <li><a href="{{ routes.home_url }}">الرئيسية</a></li>
+        <li><a href="{{ routes.collections_url }}">المنتجات</a></li>
+        <li><a href="{{ routes.blog_url }}">المقالات</a></li>
+        <li><a href="{{ routes.contact_url }}">تواصل معنا</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+

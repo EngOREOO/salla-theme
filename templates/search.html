@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>البحث | {{ store.name }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ head_assets }}
+  <link rel="stylesheet" href="{{ 'assets/main.css' | asset_url }}">
+</head>
+<body>
+  <div class="site-wrapper">
+    {% include "sections/header.html" %}
+
+    <main class="main-content">
+      <section class="section">
+        <div class="container">
+          {% include "snippets/section-title.html" with {
+            label: "البحث",
+            title: "ابحث عن البرنامج الذي تحتاجه",
+            subtitle: ""
+          } %}
+
+          <form method="get" action="{{ routes.search_url }}" class="search-bar">
+            <span>🔍</span>
+            <input type="search"
+                   name="q"
+                   value="{{ search.query }}"
+                   placeholder="اكتب اسم البرنامج، المنتج أو الكلمة المفتاحية">
+          </form>
+
+          {% if search.performed %}
+            {% if search.results_count == 0 %}
+              <p class="step-text">لم نجد نتائج مطابقة. جرّب كتابتها بطريقة مختلفة.</p>
+            {% else %}
+              <div class="categories-grid" style="grid-template-columns:repeat(auto-fill,minmax(230px,1fr));">
+                {% for product in search.results %}
+                  <div>
+                    {% include "snippets/product-card.html" with { product: product } %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endif %}
+        </div>
+      </section>
+    </main>
+
+    {% include "sections/footer.html" %}
+  </div>
+
+  <script src="{{ 'assets/main.js' | asset_url }}" defer></script>
+  {{ footer_assets }}
+</body>
+</html>
+

@@ -1,0 +1,79 @@
+<section class="section">
+  <div class="container">
+    {% include "snippets/section-title.html" with {
+      label: settings.slider_label ?? "برامج رقمية",
+      title: settings.slider_title ?? "تصفح حسب الفئة",
+      subtitle: settings.slider_subtitle ?? "تبديل سريع بين برامج أوفيس، ويندوز، الحماية وغيرها."
+    } %}
+
+    {% set tabs = settings.products_tabs ?? [] %}
+
+    {% if tabs|length == 0 %}
+      {% set tabs = [
+        { "key": "office", "title": "أوفيس", "collection_handle": "office" },
+        { "key": "windows", "title": "ويندوز", "collection_handle": "windows" },
+        { "key": "security", "title": "برامج الحماية", "collection_handle": "antivirus" }
+      ] %}
+    {% endif %}
+
+    <div class="chips-row" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;justify-content:center;">
+      {% for tab in tabs %}
+        <a href="#"
+           class="chip{% if loop.first %} is-active{% endif %}"
+           data-products-tab
+           data-tab-key="{{ tab.key }}">
+          {{ tab.title }}
+        </a>
+      {% endfor %}
+    </div>
+
+    {% for tab in tabs %}
+      {% set tab_products = collections[tab.collection_handle].products ?? [] %}
+      <div class="slider"
+           data-slider
+           data-products-panel
+           data-tab-key="{{ tab.key }}"
+           {% if not loop.first %}style="display:none;"{% endif %}>
+        <div class="slider-track" data-slider-track>
+          {% for product in tab_products | slice(0, 12) %}
+            <div class="slider-item">
+              {% include "snippets/product-card.html" with { product: product } %}
+            </div>
+          {% endfor %}
+        </div>
+        <div class="slider-nav">
+          <div class="slider-arrows">
+            <button class="slider-arrow-btn" data-slider-prev aria-label="السابق">‹</button>
+            <button class="slider-arrow-btn" data-slider-next aria-label="التالي">›</button>
+          </div>
+          <div class="slider-dots">
+            {% set slides_count = (tab_products|length / 4) | round(0, 'ceil') %}
+            {% for i in 1..slides_count %}
+              <span class="slider-dot{% if loop.first %} is-active{% endif %}" data-slider-dot></span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const tabs = document.querySelectorAll("[data-products-tab]");
+      const panels = document.querySelectorAll("[data-products-panel]");
+      if (!tabs.length) return;
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", function (e) {
+          e.preventDefault();
+          const key = tab.getAttribute("data-tab-key");
+          tabs.forEach((t) => t.classList.remove("is-active"));
+          tab.classList.add("is-active");
+          panels.forEach((panel) => {
+            panel.style.display = panel.getAttribute("data-tab-key") === key ? "" : "none";
+          });
+        });
+      });
+    });
+  </script>
+</section>
+

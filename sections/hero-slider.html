@@ -1,0 +1,64 @@
+<section class="section hero">
+  <div class="container">
+    <div class="hero-slider" data-hero-slider>
+      {% set slides = settings.hero_slides ?? [] %}
+
+      {% if slides|length == 0 %}
+        {% set slides = [
+          {
+            "title": "دعم فني بسيط لك في كل شيء",
+            "subtitle": "مفاتيح ورخص أصلية لبرامج مايكروسوفت، ويندوز، أدوبي والمزيد – تفعيل فوري وخطوة بخطوة.",
+            "cta_label": "تصفح العروض الآن",
+            "cta_link": routes.collections_url,
+            "image": assets.hero_fallback
+          }
+        ] %}
+      {% endif %}
+
+      {% for slide in slides %}
+        <div class="hero-slide{% if loop.first %} is-active{% endif %}" data-hero-slide>
+          <div class="hero-slide-inner">
+            <div class="hero-slide-content">
+              <div class="hero-badges">
+                <span class="hero-badge">تفعيل فوري بعد الدفع</span>
+                <span class="hero-badge">دعم فني عبر الواتساب</span>
+                <span class="hero-badge">ضمان استرجاع كامل</span>
+              </div>
+              <h1>{{ slide.title }}</h1>
+              <p>{{ slide.subtitle }}</p>
+              {% if slide.cta_label and slide.cta_link %}
+                <a href="{{ slide.cta_link }}">
+                  <button class="hero-cta">
+                    <span>{{ slide.cta_label }}</span>
+                    <span aria-hidden="true">↗</span>
+                  </button>
+                </a>
+              {% endif %}
+              <div class="hero-meta">
+                ⭐ {{ store.rating.average ?? 4.9 }} معدل رضا العملاء — أكثر من {{ store.orders_count ?? 1000 }} طلب مكتمل بنجاح
+              </div>
+            </div>
+            <div class="hero-slide-image">
+              {% if slide.image %}
+                <img src="{{ slide.image }}" alt="{{ slide.title }}">
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+      <div class="hero-nav">
+        <div class="hero-dots">
+          {% for slide in slides %}
+            <button class="hero-dot{% if loop.first %} is-active{% endif %}" data-hero-dot aria-label="الانتقال للشريحة {{ loop.index }}"></button>
+          {% endfor %}
+        </div>
+        <div class="hero-arrows">
+          <button class="hero-arrow-btn" data-hero-prev aria-label="السابق">‹</button>
+          <button class="hero-arrow-btn" data-hero-next aria-label="التالي">›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
